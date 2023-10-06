@@ -1,5 +1,4 @@
 import numpy as np
-from tqdm import tqdm
 
 class RungeKutta4():
     def __init__(self, f, step = 1, stopping_criterion = lambda state: True, verbose = False):
@@ -31,9 +30,6 @@ class RungeKutta4():
 
         h = self.step
 
-        if self.verbose:
-            pbar = tqdm(desc = "Integrating...", total = (x_end-x_start))
-
         try:
             while abs(x[-1]) <= abs(x_end):
                 
@@ -43,9 +39,6 @@ class RungeKutta4():
                     
                     x.append(next[0])
                     y.append(next[1])
-
-                    if self.verbose:
-                        pbar.update(h)
                         
                 else:
                     break
@@ -106,9 +99,6 @@ class RungeKuttaFehlberg45():
 
         h = initial_step
 
-        if self.verbose:
-            pbar = tqdm(desc = "Integrating...", total = (x_end-x_start))
-
         try:
             while abs(x[-1]) <= abs(x_end):
                     
@@ -116,9 +106,6 @@ class RungeKuttaFehlberg45():
                 x.append(next[0])
                 y.append(next[1])
                 h = next[2]
-
-                if self.verbose:
-                    pbar.update(h)
     
         except KeyboardInterrupt:
             if self.verbose:
